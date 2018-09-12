@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+apply from: "${rootProject.rootDir}/config.gradle"
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    defaultConfig {
+        applicationId project.ext.defaultConfig.applicationId
+        minSdkVersion project.ext.defaultConfig.minSdkVersion
+        targetSdkVersion project.ext.defaultConfig.targetSdkVersion
+        versionCode project.ext.defaultConfig.versionCode
+        versionName project.ext.defaultConfig.versionName
+        testInstrumentationRunner project.ext.defaultConfig.testRunner
+    }
+    buildTypes {
+
+        release {
+            minifyEnabled project.ext.release.minifyEnabled
+            shrinkResources project.ext.release.shrinkResources
+            zipAlignEnabled project.ext.release.zipAlignEnabled
+            multiDexEnabled project.ext.release.multiDexEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled project.ext.debug.minifyEnabled
+            shrinkResources project.ext.debug.shrinkResources
+            zipAlignEnabled project.ext.debug.zipAlignEnabled
+            multiDexEnabled project.ext.debug.multiDexEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        beta {
+            minifyEnabled project.ext.beta.minifyEnabled
+            shrinkResources project.ext.beta.shrinkResources
+            zipAlignEnabled project.ext.beta.zipAlignEnabled
+            multiDexEnabled project.ext.beta.multiDexEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //设置JDK1.8
+    compileOptions {
+        sourceCompatibility project.ext.javaVersion
+        targetCompatibility project.ext.javaVersion
+    }
+
+    // 5.0以下兼容svg
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':common')
+
+    implementation project.ext.deps.kotlin
+    implementation project.ext.deps.appCompat
+    implementation project.ext.deps.annotations
+    implementation project.ext.deps.constraint
+
+    implementation project.ext.deps.rxJava
+    implementation project.ext.deps.rxAndroid
+    implementation project.ext.deps.rxBinding
+    implementation project.ext.deps.gson
+}

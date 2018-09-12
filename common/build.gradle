@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply from: "${rootProject.rootDir}/config.gradle"
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion project.ext.defaultConfig.minSdkVersion
+        targetSdkVersion project.ext.defaultConfig.targetSdkVersion
+        versionCode project.ext.defaultConfig.versionCode
+        versionName project.ext.defaultConfig.versionName
+        testInstrumentationRunner project.ext.defaultConfig.testRunner
+
+        // 是否输出日志
+        buildConfigField("boolean", "IS_SHOW_LOG",  project.ext.isShowLog)
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //设置JDK1.8
+    compileOptions {
+        sourceCompatibility project.ext.javaVersion
+        targetCompatibility project.ext.javaVersion
+    }
+
+    // 5.0以下兼容svg
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project.ext.deps.kotlin
+    implementation project.ext.deps.logger
+    implementation project.ext.deps.appCompat
+    implementation project.ext.deps.annotations
+    implementation project.ext.deps.constraint
+
+    implementation project.ext.deps.rxJava
+    implementation project.ext.deps.rxAndroid
+    implementation project.ext.deps.rxBinding
+
+    testImplementation project.ext.deps.junit
+    androidTestImplementation project.ext.deps.testRunner
+    androidTestImplementation project.ext.deps.testEspresso
+}
