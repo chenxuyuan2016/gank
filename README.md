@@ -1,3 +1,3 @@
 # gank
-It's for fun
-Written in Kotlin
+It's for fun.
+Written in Kotlin.
