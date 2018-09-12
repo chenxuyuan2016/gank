@@ -9,6 +9,10 @@ android {
         versionCode project.ext.defaultConfig.versionCode
         versionName project.ext.defaultConfig.versionName
         testInstrumentationRunner project.ext.defaultConfig.testRunner
+
+        // 是否输出日志
+        buildConfigField("boolean", "IS_SHOW_LOG",  project.ext.isShowLog)
+        buildConfigField("String", "LOG_TAG",  project.ext.logTag)
     }
 
     buildTypes {
@@ -32,15 +36,11 @@ android {
         targetCompatibility project.ext.javaVersion
     }
 
-    // 5.0以下兼容svg
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation project.ext.deps.kotlin
     implementation project.ext.deps.appCompat
     implementation project.ext.deps.annotations

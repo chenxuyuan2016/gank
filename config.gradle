@@ -13,6 +13,7 @@ project.ext {
     isModule = true
     javaVersion = JavaVersion.VERSION_1_8
     isShowLog = 'true'
+    logTag = '"logTag"'
 
     defaultConfig = [
             applicationId   : "com.chen.kotlin",

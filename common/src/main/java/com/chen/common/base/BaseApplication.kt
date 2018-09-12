@@ -4,9 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.chen.common.manager.AppManager
-import com.chen.common.manager.AppManager.Companion.instance
-import com.chen.common.util.AppUtils
-import com.orhanobut.logger.Logger
 
 open class BaseApplication : Application() {
 

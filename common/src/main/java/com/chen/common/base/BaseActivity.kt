@@ -18,7 +18,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
                 .apply {
                     onCreate(this@BaseActivity)
                 }
-
         initData()
     }
 
@@ -30,6 +29,5 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     abstract fun layoutId(): Int
 
     abstract fun initData()
-
 
 }

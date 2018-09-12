@@ -1,67 +1,54 @@
 package com.chen.common.base.presenter
 
+import android.app.Activity
 import android.support.v4.app.Fragment
 import com.chen.common.annotation.CreatePresenter
 import com.chen.common.annotation.PresenterVariable
-import com.chen.common.base.BaseActivity
 
-class PresenterProviders private constructor(activity: BaseActivity?, fragment: Fragment?) {
+class PresenterProviders private constructor(private var activity: Activity?,
+                                             private var v4Fragment: Fragment?,
+                                             private var fragment: android.app.Fragment?) {
 
     private var presenterStore = PresenterStore()
-    private var fragment: Fragment? = null
-    private var activity: BaseActivity? = null
-    private lateinit var clazz: Class<*>
+
+    private var clazz: Class<*> = when {
+        activity != null -> activity!!::class.java
+        fragment != null -> fragment!!::class.java
+        v4Fragment != null -> v4Fragment!!::class.java
+        else -> throw Exception("I have no idea, what kind is this.")
+    }
 
     init {
-        if (activity != null) {
-            this.activity = activity
-            clazz = activity::class.java
-        }
-        if (fragment != null) {
-            this.fragment = fragment
-            clazz = fragment::class.java
-        }
         resolveCreatePresenter()
         resolvePresenterVariable()
     }
 
     companion object {
-        fun inject(activity: BaseActivity) = PresenterProviders(activity, null)
-        fun inject(fragment: Fragment) = PresenterProviders(null, fragment)
-    }
-
-
-    private fun resolveCreatePresenter() {
-        val createPresenter = clazz.getAnnotation(CreatePresenter::class.java)
-        if (createPresenter != null) {
-            val kClass = createPresenter.kClass
-            kClass.iterator().forEach {
-                try {
-                    presenterStore.put(it.java.canonicalName, it.java.newInstance() as Presenter)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+        fun <T> inject(t: T): PresenterProviders {
+            return PresenterProviders(t as? Activity, t as? Fragment, t as? android.app.Fragment)
         }
     }
 
+    private fun resolveCreatePresenter() {
+        clazz.getAnnotation(CreatePresenter::class.java)?.kClass?.forEach {
+            presenterStore.put(it.java.canonicalName, it.java.newInstance() as Presenter)
+        }
+    }
 
     private fun resolvePresenterVariable() {
-        clazz.declaredFields.iterator().forEach {
-            val annotations = it.declaredAnnotations
-            if (!annotations.isEmpty()) {
-                if (annotations[0] is PresenterVariable) {
-                    val instant = presenterStore.get(it.type.name)
-                    if (instant != null) {
-                        try {
-                            it.isAccessible = true
-                            it.set(if (activity == null) fragment else activity, instant)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
+        clazz.declaredFields.forEach {
+            it.declaredAnnotations.let {
+                if (it.isEmpty() || it[0] !is PresenterVariable) return@forEach
+            }
+            presenterStore.get(it.type.name)?.run {
+                it.isAccessible = true
+                when {
+                    activity != null -> it.set(activity, this)
+                    fragment != null -> it.set(fragment, this)
+                    else -> it.set(v4Fragment, this)
                 }
             }
+
         }
     }
 

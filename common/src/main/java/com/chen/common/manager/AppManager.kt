@@ -8,11 +8,11 @@ class AppManager {
     var stack: Stack<Activity> = Stack()
 
     private object Holder {
-        val INSTANCE = AppManager()
+        val instance = AppManager()
     }
 
     companion object {
-        val instance: AppManager by lazy { Holder.INSTANCE }
+        val instance: AppManager by lazy { Holder.instance }
     }
 
     fun addActivity(activity: Activity?) = activity?.let { stack.add(activity) }

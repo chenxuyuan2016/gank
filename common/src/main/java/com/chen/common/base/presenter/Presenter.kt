@@ -8,5 +8,4 @@ interface Presenter {
     fun <V : BaseView> onCreate(v: V)
 
     fun onDestroy()
-
 }

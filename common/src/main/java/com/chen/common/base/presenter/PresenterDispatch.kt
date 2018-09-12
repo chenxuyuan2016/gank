@@ -2,20 +2,10 @@ package com.chen.common.base.presenter
 
 import com.chen.common.base.BaseView
 
-class PresenterDispatch(providers: PresenterProviders) {
-    var map = providers.getPresenterStore().getMap()
+class PresenterDispatch(var providers: PresenterProviders) {
 
-    fun <V : BaseView> onCreate(v: V) {
-        map.forEach {
-            it.value.onCreate(v)
-        }
-    }
+    fun <V : BaseView> onCreate(v: V) = providers.getPresenterStore().getMap().forEach { it.value.onCreate(v) }
 
-
-    fun onDestroy() {
-        map.forEach {
-            it.value.onDestroy()
-        }
-    }
+    fun onDestroy() = providers.getPresenterStore().clear()
 
 }
