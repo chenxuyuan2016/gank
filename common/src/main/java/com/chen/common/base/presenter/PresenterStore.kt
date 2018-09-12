@@ -4,8 +4,8 @@ class PresenterStore {
 
     private var hashMap = HashMap<String, Presenter>()
 
-    fun put(key: String, value: Presenter) = with(hashMap) {
-        this[key] = value
+    fun put(key: String, value: Presenter) {
+        hashMap[key] = value
     }
 
     fun get(key: String) = hashMap[key]
