@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply from: "${rootProject.rootDir}/config.gradle"
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion project.ext.defaultConfig.minSdkVersion
+        targetSdkVersion project.ext.defaultConfig.targetSdkVersion
+        versionCode project.ext.defaultConfig.versionCode
+        versionName project.ext.defaultConfig.versionName
+        testInstrumentationRunner project.ext.defaultConfig.testRunner
+
+        // 是否输出日志
+        buildConfigField("boolean", "IS_SHOW_LOG",  project.ext.isShowLog)
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL",  project.ext.release.baseUrl)
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL",  project.ext.debug.baseUrl)
+        }
+        beta {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL",  project.ext.beta.baseUrl)
+        }
+    }
+
+    //设置JDK1.8
+    compileOptions {
+        sourceCompatibility project.ext.javaVersion
+        targetCompatibility project.ext.javaVersion
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project.ext.deps.kotlin
+    implementation project.ext.deps.appCompat
+    implementation project.ext.deps.annotations
+
+    implementation project.ext.deps.okHttp
+    implementation project.ext.deps.stetho
+    implementation project.ext.deps.stethoOkhttp3
+    implementation project.ext.deps.gson
+    implementation project.ext.deps.retrofit
+    implementation project.ext.deps.retrofitGson
+    implementation project.ext.deps.retrofitRxjava
+
+}
