@@ -44,7 +44,4 @@ dependencies {
     implementation project.ext.deps.rxAndroid
     implementation project.ext.deps.rxBinding
 
-    testImplementation project.ext.deps.junit
-    androidTestImplementation project.ext.deps.testRunner
-    androidTestImplementation project.ext.deps.testEspresso
 }
