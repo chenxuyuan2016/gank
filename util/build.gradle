@@ -45,7 +45,4 @@ dependencies {
     implementation project.ext.deps.appCompat
     implementation project.ext.deps.annotations
 
-    testImplementation project.ext.deps.junit
-    androidTestImplementation project.ext.deps.testRunner
-    androidTestImplementation project.ext.deps.testEspresso
 }
