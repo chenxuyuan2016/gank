@@ -32,11 +32,6 @@ android {
         targetCompatibility project.ext.javaVersion
     }
 
-    // 5.0以下兼容svg
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-    }
-
 }
 
 dependencies {
