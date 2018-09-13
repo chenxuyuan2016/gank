@@ -17,7 +17,7 @@ class SPUtil<T>(context: Context, private val key: String, val value: T) {
 
     @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
     private fun getSharePreferences(key: String, value: T): T = with(sp) {
-        return when (value) {
+        when (value) {
             is Long -> getLong(key, value)
             is String -> getString(key, value)
             is Int -> getInt(key, value)

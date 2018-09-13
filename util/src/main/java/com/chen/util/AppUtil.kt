@@ -8,7 +8,7 @@ object AppUtil {
     fun getAppName(context: Context): String = getAppName(context)
 
     fun getAppName(context: Context, @NotNull packageName: String): String = with(context) {
-        return getString(packageManager.getPackageInfo(packageName, 0).applicationInfo.labelRes)
+        getString(packageManager.getPackageInfo(packageName, 0).applicationInfo.labelRes)
     }
 
     fun getAppPackageName(context: Context): String = context.packageName
