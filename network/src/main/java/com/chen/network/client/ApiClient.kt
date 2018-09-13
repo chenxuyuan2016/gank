@@ -65,15 +65,15 @@ class ApiClient private constructor(private var readTime: Long,
 
     @Suppress("ConstantConditionIf")
     private fun getClient(): OkHttpClient = with(OkHttpClient.Builder()) {
-        this.readTimeout(readTime, TimeUnit.MILLISECONDS)
+        if (BuildConfig.IS_SHOW_LOG) {
+            addNetworkInterceptor(StethoInterceptor())
+        }
+        // No automatic reconnection network
+        retryOnConnectionFailure(false)
+                .readTimeout(readTime, TimeUnit.MILLISECONDS)
                 .writeTimeout(writeTime, TimeUnit.MILLISECONDS)
                 .connectTimeout(connectTime, TimeUnit.MILLISECONDS)
-                // No automatic reconnection network
-                .retryOnConnectionFailure(false)
-        if (BuildConfig.IS_SHOW_LOG) {
-            this.addNetworkInterceptor(StethoInterceptor())
-        }
-        return this.build()
+                .build()
     }
 
 
