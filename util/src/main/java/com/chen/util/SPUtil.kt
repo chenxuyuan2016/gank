@@ -22,7 +22,7 @@ class SPUtil<T>(context: Context, private val key: String, val value: T) {
             is Int -> getInt(key, value)
             is Boolean -> getBoolean(key, value)
             is Float -> getFloat(key, value)
-            else -> throw Exception("This type of data cannot be saved!")
+            else -> throw Exception("I have no idea, what type is this.")
         } as T
 
     }
@@ -34,7 +34,7 @@ class SPUtil<T>(context: Context, private val key: String, val value: T) {
             is Int -> putInt(key, value)
             is Boolean -> putBoolean(key, value)
             is Float -> putFloat(key, value)
-            else -> throw IllegalArgumentException("This type of data cannot be saved!")
+            else -> throw IllegalArgumentException("I have no idea, what type is this.")
         }.apply()
     }
 }
