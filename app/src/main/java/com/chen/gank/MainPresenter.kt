@@ -2,16 +2,22 @@ package com.chen.gank
 
 import com.chen.common.base.BasePresenter
 import com.chen.common.base.BaseView
-import io.reactivex.Flowable
+import com.chen.network.client.ApiClient
+import com.chen.util.LogUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class MainPresenter : BasePresenter<BaseView>() {
 
 
-    fun test() {
+    fun requestTodayFromNet() {
         // When activity destroy, it will dispose itself
         mCompositeDisposable.add(
-                Flowable.just("test from MainPresenter")
-                        .subscribe({ mView?.toast(it) })
+                ApiClient.instance.build()
+                        .get("today")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ LogUtil.e(it.toString()) })
         )
     }
 }

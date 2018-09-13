@@ -1,6 +1,7 @@
 package com.chen.gank
 
 import com.chen.common.base.BaseApplication
+import com.chen.network.util.StethoUtils
 
 class MyApplication : BaseApplication() {
 
@@ -12,5 +13,6 @@ class MyApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        StethoUtils.init(this)
     }
 }

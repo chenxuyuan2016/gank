@@ -54,6 +54,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':common')
     implementation project(':util')
+    implementation project(':network')
 
     implementation project.ext.deps.kotlin
     implementation project.ext.deps.appCompat

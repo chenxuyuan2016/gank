@@ -11,32 +11,20 @@ import com.chen.util.ExpandUtil.toastShow
 
 @CreatePresenter(
         kClass = [
-            RegisterPresenter::class,
-            LoginPresenter::class
+            MainPresenter::class
         ]
 )
-class MainActivity : BaseActivity(), LoginView,RegisterView {
+class MainActivity : BaseActivity() {
 
     @PresenterVariable
     private var mainPresenter: MainPresenter? = null
 
-    @PresenterVariable
-    private var registerPresenter: RegisterPresenter? = null
-
-    @PresenterVariable
-    private var loginPresenter: LoginPresenter? = null
-
     override fun layoutId(): Int = R.layout.activity_main
 
     override fun initData() {
-        // It will not report wrong, because if it is empty, it does not perform.
-        // mainPresenter?.test()
-        registerPresenter?.register()
+        mainPresenter?.requestTodayFromNet()
     }
 
     override fun toast(msg: String) = toastShow(msg)
 
-    override fun registerSuccess() {
-        loginPresenter?.login()
-    }
 }

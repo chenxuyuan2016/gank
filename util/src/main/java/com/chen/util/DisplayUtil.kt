@@ -1,11 +1,11 @@
 package com.chen.util
 
-import android.app.Activity
+import android.content.Context
 
 object DisplayUtil {
 
-    fun getWidth(activity: Activity): Int = activity.windowManager.defaultDisplay.width
+    fun getWidth(context: Context): Int = context.resources.displayMetrics.widthPixels
 
-    fun getHeight(activity: Activity): Int = activity.windowManager.defaultDisplay.height
+    fun getHeight(context: Context): Int = context.resources.displayMetrics.heightPixels
 
 }
