@@ -9,6 +9,7 @@ abstract class BasePresenter<T : BaseView> : Presenter {
 
     var mView: T? = null
 
+    @Suppress("UNCHECKED_CAST")
     override fun <V : BaseView> onCreate(v: V) {
         this.mView = v as T
     }
