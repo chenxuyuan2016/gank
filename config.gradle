@@ -95,9 +95,9 @@ project.ext {
 
             aspectj               : "org.aspectj:aspectjrt:1.8.9",
 
-            glide                : "com.github.bumptech.glide:glide:$gradle_version",
-            glideArr             : "com.github.bumptech.glide:glide:$gradle_version@arr",
-            glideCompiler        : "com.github.bumptech.glide:compiler:$gradle_version"
+            glide                 : "com.github.bumptech.glide:glide:$gradle_version",
+            glideArr              : "com.github.bumptech.glide:glide:$gradle_version@arr",
+            glideCompiler         : "com.github.bumptech.glide:compiler:$gradle_version"
     ]
 }
 
