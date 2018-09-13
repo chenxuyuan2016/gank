@@ -2,7 +2,6 @@ package com.chen.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.io.Serializable
 import kotlin.reflect.KProperty
 
 
@@ -15,6 +14,8 @@ class SPUtil<T>(context: Context, private val key: String, val value: T) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) = putSharePreferences(key, value)
 
+
+    @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
     private fun getSharePreferences(key: String, value: T): T = with(sp) {
         return when (value) {
             is Long -> getLong(key, value)
