@@ -21,8 +21,8 @@ class RegisterPresenter : BasePresenter<RegisterView>() {
         mCompositeDisposable.add(
                 Flowable.interval(3, 1, TimeUnit.SECONDS)
                         .take(1)
-                        .subscribeOn(AndroidSchedulers.mainThread())
-                        .observeOn(Schedulers.io())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mView?.registerSuccess()
                         })

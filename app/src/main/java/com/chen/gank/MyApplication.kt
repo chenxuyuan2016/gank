@@ -5,7 +5,6 @@ import com.chen.common.base.BaseApplication
 class MyApplication : BaseApplication() {
 
     companion object {
-        // 伴生对象
         lateinit var instance: MyApplication
             private set
     }

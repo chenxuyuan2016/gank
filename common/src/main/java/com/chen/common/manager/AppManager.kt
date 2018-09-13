@@ -15,9 +15,9 @@ class AppManager {
         val instance: AppManager by lazy { Holder.instance }
     }
 
-    fun addActivity(activity: Activity?) = activity?.let { stack.add(activity) }
+    fun addActivity(activity: Activity?) = activity?.let { stack.add(it) }
 
-    fun removeActivity(activity: Activity?) = activity?.let { stack.remove(activity) }
+    fun removeActivity(activity: Activity?) = activity?.let { stack.remove(it) }
 
     fun getCurrentActivity(): Activity = stack.lastElement()
 
