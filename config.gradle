@@ -32,8 +32,7 @@ project.ext {
             zipAlignEnabled: true,
             multiDexEnabled: true,
             isDebug        : "false",
-            commonUrl      : '"https://dddcommon10.fen360.com/"',
-            userUrl        : '"https://ddduserapi10.fen360.com/"'
+            baseUrl        : '"http://gank.io/api/"',
     ]
 
     debug = [
@@ -42,8 +41,7 @@ project.ext {
             zipAlignEnabled: false,
             multiDexEnabled: true,
             isDebug        : "true",
-            commonUrl      : '"https://dddcommon10.fen360.com/"',
-            userUrl        : '"https://ddduserapi10.fen360.com/"'
+            baseUrl        : '"http://gank.io/api/"',
     ]
 
     beta = [
@@ -52,8 +50,7 @@ project.ext {
             zipAlignEnabled: true,
             multiDexEnabled: true,
             isDebug        : "true",
-            commonUrl      : '"https://dddcommon10.fen360.com/"',
-            userUrl        : '"https://ddduserapi10.fen360.com/"'
+            baseUrl        : '"http://gank.io/api/"',
     ]
 
     deps = [
