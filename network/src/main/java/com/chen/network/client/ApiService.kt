@@ -1,5 +1,7 @@
 package com.chen.network.client
 
+import com.chen.network.bean.BaseModel
+import com.chen.network.bean.TodayModel
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.*
@@ -21,4 +23,8 @@ interface ApiService {
     @JvmSuppressWildcards
     fun post(@Path(value = "url") url: String, @QueryMap data: Map<String, Any?>): Flowable<JsonObject>
 
+
+    @GET("today")
+    @Headers("Content-Type: application/x-www-form-urlencoded; charset=UTF-8")
+    fun today(): Flowable<BaseModel<TodayModel>>
 }
