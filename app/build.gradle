@@ -64,5 +64,4 @@ dependencies {
     implementation project.ext.deps.rxJava
     implementation project.ext.deps.rxAndroid
     implementation project.ext.deps.rxBinding
-    implementation project.ext.deps.gson
 }

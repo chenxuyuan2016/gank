@@ -32,7 +32,7 @@ project.ext {
             zipAlignEnabled: true,
             multiDexEnabled: true,
             isDebug        : "false",
-            baseUrl        : '"http://gank.io/api/"',
+            baseUrl        : '"https://gank.io/api/"',
     ]
 
     debug = [
@@ -41,7 +41,7 @@ project.ext {
             zipAlignEnabled: false,
             multiDexEnabled: true,
             isDebug        : "true",
-            baseUrl        : '"http://gank.io/api/"',
+            baseUrl        : '"https://gank.io/api/"',
     ]
 
     beta = [
@@ -50,7 +50,7 @@ project.ext {
             zipAlignEnabled: true,
             multiDexEnabled: true,
             isDebug        : "true",
-            baseUrl        : '"http://gank.io/api/"',
+            baseUrl        : '"https://gank.io/api/"',
     ]
 
     deps = [
