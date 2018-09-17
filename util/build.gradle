@@ -45,4 +45,10 @@ dependencies {
     implementation project.ext.deps.appCompat
     implementation project.ext.deps.annotations
 
+    implementation project.ext.deps.glide
+    implementation (project.ext.deps.glideArr){
+        transitive = true
+    }
+    annotationProcessor project.ext.deps.glideCompiler
+
 }

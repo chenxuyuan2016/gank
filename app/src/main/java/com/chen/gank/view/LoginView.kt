@@ -1,4 +1,4 @@
-package com.chen.gank.login
+package com.chen.gank.view
 
 import com.chen.common.base.BaseView
 

@@ -1,7 +1,8 @@
-package com.chen.gank.login
+package com.chen.gank.presenter
 
 import com.chen.common.base.BasePresenter
 import com.chen.gank.MyApplication
+import com.chen.gank.view.LoginView
 import com.chen.util.LogUtil
 import com.chen.util.SPUtil
 

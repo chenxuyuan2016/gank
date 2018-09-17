@@ -1,4 +1,4 @@
-package com.chen.gank
+package com.chen.gank.presenter
 
 import com.chen.common.base.BasePresenter
 import com.chen.common.base.BaseView

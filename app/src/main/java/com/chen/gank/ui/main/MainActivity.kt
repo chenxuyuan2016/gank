@@ -1,13 +1,10 @@
-package com.chen.gank
+package com.chen.gank.ui.main
 
 import com.chen.common.annotation.CreatePresenter
 import com.chen.common.annotation.PresenterVariable
 import com.chen.common.base.BaseActivity
-import com.chen.gank.login.LoginPresenter
-import com.chen.gank.login.LoginView
-import com.chen.gank.register.RegisterPresenter
-import com.chen.gank.login.RegisterView
-import com.chen.util.ExpandUtil.toastShow
+import com.chen.gank.R
+import com.chen.gank.presenter.MainPresenter
 
 @CreatePresenter(
         kClass = [
@@ -25,6 +22,5 @@ class MainActivity : BaseActivity() {
         mainPresenter?.requestTodayFromNet()
     }
 
-    override fun toast(msg: String) = toastShow(msg)
 
 }
