@@ -1,12 +1,14 @@
 package com.chen.util
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 
-class StatusBarUtil private constructor(var activity: Activity, var color: Int) {
+class StatusBarUtil constructor(var activity: Activity, var color: Int) {
 
+    constructor(activity: Activity) : this(activity, Color.TRANSPARENT)
 
     fun a() = with(activity) {
         val statusBarHeight = getStatusBarHeight()
