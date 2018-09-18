@@ -2,14 +2,16 @@ package com.chen.common.base.presenter
 
 import android.app.Activity
 import android.support.v4.app.Fragment
-import com.chen.common.annotation.CreatePresenter
-import com.chen.common.annotation.PresenterVariable
+import com.chen.common.annotation.PresenterCreate
+import com.chen.common.annotation.PresenterSet
+import com.chen.common.base.BaseView
 
 class PresenterProviders private constructor(private var activity: Activity?,
                                              private var v4Fragment: Fragment?,
                                              private var fragment: android.app.Fragment?) {
 
-    private var presenterStore = PresenterStore()
+
+    private var hashMap = HashMap<String, Presenter>()
 
     private var clazz: Class<*> = when {
         activity != null -> activity!!::class.java
@@ -19,8 +21,8 @@ class PresenterProviders private constructor(private var activity: Activity?,
     }
 
     init {
-        resolveCreatePresenter()
-        resolvePresenterVariable()
+        createPresenter()
+        setPresenter()
     }
 
     companion object {
@@ -29,18 +31,18 @@ class PresenterProviders private constructor(private var activity: Activity?,
         }
     }
 
-    private fun resolveCreatePresenter() {
-        clazz.getAnnotation(CreatePresenter::class.java)?.kClass?.forEach {
-            presenterStore.put(it.java.canonicalName, it.java.newInstance() as Presenter)
+    private fun createPresenter() {
+        clazz.getAnnotation(PresenterCreate::class.java)?.kClass?.forEach {
+            hashMap[it.java.canonicalName] = it.java.newInstance() as Presenter
         }
     }
 
-    private fun resolvePresenterVariable() {
+    private fun setPresenter() {
         clazz.declaredFields.forEach {
             it.declaredAnnotations.let {
-                if (it.isEmpty() || it[0] !is PresenterVariable) return@forEach
+                if (it.isEmpty() || it[0] !is PresenterSet) return@forEach
             }
-            presenterStore.get(it.type.name)?.run {
+            hashMap[it.type.name]?.run {
                 it.isAccessible = true
                 when {
                     activity != null -> it.set(activity, this)
@@ -52,7 +54,13 @@ class PresenterProviders private constructor(private var activity: Activity?,
         }
     }
 
-    fun getPresenterStore() = presenterStore
+
+    fun <V : BaseView> onPresenterCreate(v: V) = hashMap.forEach { it.value.onCreate(v) }
+
+    fun onPresenterDestroy() = with(hashMap) {
+        forEach { it.value.onDestroy() }
+        clear()
+    }
 
 }
 

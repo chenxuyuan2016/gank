@@ -1,35 +1,30 @@
 package com.chen.common.base
 
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
-import com.chen.common.base.presenter.PresenterDispatch
+import com.chen.common.extend.Extend.toastShow
+import com.chen.common.base.presenter.PresenterManager
 import com.chen.common.base.presenter.PresenterProviders
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
-    private var presenterDispatch: PresenterDispatch? = null
-
-    fun Context.toastShow(msg: CharSequence?) = msg?.let {
-        Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-    }
+    private var presenterManager: PresenterManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(layoutId())
-        presenterDispatch = PresenterDispatch(PresenterProviders.inject(this))
+        presenterManager = PresenterManager(PresenterProviders.inject(this))
                 .apply {
-                    onCreate(this@BaseActivity)
+                    onPresenterCreate(this@BaseActivity)
                 }
         initData()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenterDispatch?.onDestroy()
+        presenterManager?.onPresenterDestroy()
     }
 
     abstract fun layoutId(): Int

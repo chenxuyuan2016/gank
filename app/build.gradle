@@ -58,10 +58,13 @@ dependencies {
 
     implementation project.ext.deps.kotlin
     implementation project.ext.deps.appCompat
+    implementation project.ext.deps.materialDesign
+    implementation project.ext.deps.recyclerView
     implementation project.ext.deps.annotations
     implementation project.ext.deps.constraint
 
     implementation project.ext.deps.rxJava
     implementation project.ext.deps.rxAndroid
     implementation project.ext.deps.rxBinding
+
 }
